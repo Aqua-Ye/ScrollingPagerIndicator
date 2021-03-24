@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 
@@ -433,11 +432,7 @@ public class ScrollingPagerIndicator extends View {
                     scale = getDotScaleAt(i);
                 }
 
-                int color = calculateDotColor(scale);
-
-                Log.d("Haykk", "Color is " + color);
-
-                paint.setColor(color);
+                paint.setColor(calculateDotColor(scale));
 
                 float margin = 0;
                 if (dotCount <= visibleDotCount) {
@@ -458,15 +453,12 @@ public class ScrollingPagerIndicator extends View {
                 rect.right = right;
                 rect.bottom = bottom;
 
-                float center = getDotOffsetAt(selectedPosition) - visibleFramePosition + margin;
-                float diff = Math.abs(center - cx);
-//                paint.setAlpha((int) (255 * (spaceBetweenDotCenters * 2) / diff));
-
                 canvas.drawRoundRect(
-                        rect,
-                        dotRadius,
-                        dotRadius,
-                        paint);
+                    rect,
+                    dotRadius,
+                    dotRadius,
+                    paint
+                );
             }
         }
     }
